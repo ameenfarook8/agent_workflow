@@ -1,23 +1,19 @@
-name: Deploy to GitHub Pages (Production)
+name: Deploy to GitHub Pages (Dev)
 
 on:
-  pull_request:
-    types:
-      - closed
+  push:
     branches:
-      - main
+      - dev
 
 permissions:
   contents: write
 
 concurrency:
-  group: pages-production
+  group: pages-dev
   cancel-in-progress: true
 
 jobs:
   build-and-deploy:
-    # Only run when a PR from the dev branch is actually merged into main
-    if: github.event.pull_request.merged == true && github.event.pull_request.head.ref == 'dev'
     runs-on: ubuntu-latest
 
     steps:
@@ -36,12 +32,13 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          VITE_BASE: /agent_workflow/
+          VITE_BASE: /agent_workflow/dev/
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages (dev subdirectory)
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          # Deploys to the root of the gh-pages branch
-          # Production URL: https://<user>.github.io/agent_workflow/
+          destination_dir: dev
+          # Deploys to the /dev subfolder of the gh-pages branch
+          # Dev URL: https://<user>.github.io/agent_workflow/dev/
