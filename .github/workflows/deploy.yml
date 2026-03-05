@@ -36,7 +36,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          VITE_BASE: /agent_workflow/
+          VITE_BASE: /agent-workflow/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
@@ -44,4 +44,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           # Deploys to the root of the gh-pages branch
-          # Production URL: https://<user>.github.io/agent_workflow/
+          # Production URL: https://<user>.github.io/agent-workflow/

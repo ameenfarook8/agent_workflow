@@ -32,13 +32,13 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          VITE_BASE: /agent_workflow/dev/
+          VITE_BASE: /agent-workflow-dev/
 
       - name: Deploy to GitHub Pages (dev subdirectory)
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          destination_dir: dev
-          # Deploys to the /dev subfolder of the gh-pages branch
-          # Dev URL: https://<user>.github.io/agent_workflow/dev/
+          destination_dir: agent-workflow-dev
+          # Deploys to the /agent-workflow-dev subfolder of the gh-pages branch
+          # Dev URL: https://<user>.github.io/agent-workflow-dev/
